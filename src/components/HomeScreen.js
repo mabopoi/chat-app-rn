@@ -18,7 +18,11 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.buttonSign}>
-        <Button color='#0754EE' title='Sign Up' />
+        <Button
+          color='#0754EE'
+          title='Sign Up'
+          onPress={() => navigation.navigate('Sign Up')}
+        />
       </View>
       <StatusBar style='auto' />
     </View>

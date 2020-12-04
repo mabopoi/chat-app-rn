@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Form from './Form';
 
-const LogInScreen = () => {
-  const [loginData, setLoginData] = useState({});
+const SignUpScreen = () => {
+  const [signUpData, setSignUpData] = useState({});
 
   const handleText = (name, value) => {
-    const newLoginData = {
-      ...loginData,
+    const newSignUpData = {
+      ...signUpData,
       [name]: value,
     };
-    setLoginData(newLoginData);
+    setSignUpData(newSignUpData);
   };
 
   const handleSubmit = () => {};
 
   return (
     <View style={styles.container}>
-      <Form handleSubmit={handleSubmit} handleText={handleText} />
+      <Form signUp handleText={handleText} handleSubmit={handleSubmit} />
     </View>
   );
 };
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogInScreen;
+export default SignUpScreen;
