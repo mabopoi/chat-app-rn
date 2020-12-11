@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Form from './Form';
 
-const LogInScreen = () => {
+const LogInScreen = ({ navigation }) => {
   const [loginData, setLoginData] = useState({});
 
   const handleText = (name, value) => {
@@ -13,7 +13,9 @@ const LogInScreen = () => {
     setLoginData(newLoginData);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    navigation.replace('Chat');
+  };
 
   return (
     <View style={styles.container}>
