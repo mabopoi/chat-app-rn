@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Form from './Form';
+import axios from 'axios';
 
 const LogInScreen = ({ navigation }) => {
   const [loginData, setLoginData] = useState({});
@@ -12,9 +13,17 @@ const LogInScreen = ({ navigation }) => {
     };
     setLoginData(newLoginData);
   };
-
-  const handleSubmit = () => {
-    navigation.replace('Chat');
+  const handleSubmit = async () => {
+    const login = await axios.post(
+      'http://localhost:3000/auth/sign-in',
+      loginData
+    );
+    console.log(login);
+    if (login.status === 200) {
+      navigation.replace('Chat');
+    } else {
+      // setError()
+    }
   };
 
   return (

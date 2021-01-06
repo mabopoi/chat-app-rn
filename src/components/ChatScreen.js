@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,13 @@ import {
   FlatList,
 } from 'react-native';
 import io from 'socket.io-client';
+import { useUser } from '../hooks/useUser';
 
 const ChatScreen = () => {
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   const socketRef = useRef();
+  const user = useUser();
 
   useEffect(() => {
     socketRef.current = io('localhost:3000');
@@ -22,7 +24,7 @@ const ChatScreen = () => {
   }, []);
 
   const sendMessage = () => {
-    socketRef.current.emit('chat msg', message);
+    socketRef.current.emit('chat msg', { message, user });
     setMessage('');
   };
 
@@ -33,7 +35,8 @@ const ChatScreen = () => {
           data={chatMessages}
           renderItem={(msg) => (
             <View style={styles.msgBackground}>
-              <Text style={styles.msg}>{msg.item}</Text>
+              <Text style={styles.msg}>{msg.item.message}</Text>
+              <Text style={styles.msg}>{msg.item.user.name}</Text>
             </View>
           )}
           keyExtractor={(item, index) => index.toString()}
